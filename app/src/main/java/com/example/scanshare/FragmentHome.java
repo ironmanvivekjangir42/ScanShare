@@ -24,8 +24,8 @@ public class FragmentHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
-        ViewPager viewPager = (ViewPager) v.findViewById(R.id.talentsVIew);
-        TabLayout talentsTitles = (TabLayout) v.findViewById(R.id.TalentsTitles);
+        ViewPager viewPager = (ViewPager) v.findViewById(R.id.viewpager);
+        TabLayout talentsTitles = (TabLayout) v.findViewById(R.id.titles);
         addTabs(viewPager);
         talentsTitles.setupWithViewPager(viewPager);
 

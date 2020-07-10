@@ -8,13 +8,13 @@
     tools:context=".FragmentHome">
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/TalentsTitles"
+        android:id="@+id/titles"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabInlineLabel="false" />
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/talentsVIew"
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
          />
