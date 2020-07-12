@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
 
     defaultConfig {
-        applicationId "com.example.scanshare"
+        defaultConfig.applicationId "com.example.scanshare"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -26,6 +26,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation project(':scanlibrary')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
     //noinspection GradleCompatible
     implementation 'com.android.support:design:28.0.0'
