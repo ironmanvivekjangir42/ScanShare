@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.scanshare.MainActivity;
 import com.example.scanshare.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.scanlibrary.ScanActivity;
@@ -35,7 +36,7 @@ public class FragmentScan extends Fragment {
 
     ImageView scannedImageView;
 
-    public ArrayList<Bitmap> bitmapList;
+    public static ArrayList<Bitmap> bitmapList;
 
     String[] PERMISSIONS = {
             android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -133,10 +134,11 @@ public class FragmentScan extends Fragment {
     }
 
     public void saveImage(){
-        Intent saveintent = new Intent(getActivity(),SaveScan.class);
-        saveintent.putExtra("list", bitmapList);
+        Intent saveintent = new Intent(getContext(),SaveScan.class);
+        //saveintent.putExtra("ImageList",bitmapList);
         Toast.makeText(getContext(), "save image", Toast.LENGTH_SHORT).show();
         startActivity(saveintent);
+
     }
 
     public void addImage(){

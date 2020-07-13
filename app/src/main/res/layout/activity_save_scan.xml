@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".scan.SaveScan">
 
+    <ImageView
+        android:id="@+id/imageViewSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="TODO" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
