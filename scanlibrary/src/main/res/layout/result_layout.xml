@@ -5,11 +5,33 @@
     android:background="@android:color/black"
     android:orientation="vertical">
 
+    <FrameLayout
+        android:id="@+id/framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/topBar"
+        android:layout_alignBottom="@+id/topBar"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/scanPadding"
+        android:layout_marginTop="@dimen/scanPadding"
+        android:layout_marginEnd="@dimen/scanPadding"
+        android:layout_marginBottom="63dp">
+
+        <ImageView
+            android:id="@+id/scannedImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/scanPadding" />
+    </FrameLayout>
+
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical">
+        android:layout_above="@+id/bottomBar"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="0dp">
 
         <Button
             android:id="@+id/original"
@@ -55,32 +77,62 @@
             android:textColor="@android:color/white" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/doneButton"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/bottom_background_color"
-        android:orientation="horizontal"
-        android:padding="@dimen/bottom_bar_padding"
-        android:text="@string/done" />
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="0dp">
 
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/doneButton"
-        android:layout_below="@id/topBar"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/scanPadding">
-
-        <ImageView
-            android:id="@+id/scannedImage"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/rotateR"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/scanPadding" />
-    </FrameLayout>
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_image"
+            android:text="Rotate R"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/rotateL"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_enhamce_image"
+            android:singleLine="true"
+            android:text="Rotate L"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/addimage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_gray"
+            android:singleLine="true"
+            android:text="Add"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/doneButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_black_and_white"
+            android:singleLine="true"
+            android:text="Done"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+
+
+
 
 
 </RelativeLayout>

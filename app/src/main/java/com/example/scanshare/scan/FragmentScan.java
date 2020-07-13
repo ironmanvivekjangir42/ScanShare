@@ -26,6 +26,7 @@ import com.scanlibrary.ScanActivity;
 import com.scanlibrary.ScanConstants;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class FragmentScan extends Fragment {
@@ -33,7 +34,8 @@ public class FragmentScan extends Fragment {
     private static final int REQUEST_CODE = 99;
 
     ImageView scannedImageView;
-    boolean boolean_permission;
+
+    public ArrayList<Bitmap> bitmapList;
 
     String[] PERMISSIONS = {
             android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -53,6 +55,7 @@ public class FragmentScan extends Fragment {
                 if ((ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) &&
                         (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) &&
                         (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED)) {
+                    bitmapList = new ArrayList<Bitmap>();
                     openCamera();
                 } else {
                     fn_permission();
@@ -71,7 +74,7 @@ public class FragmentScan extends Fragment {
             requestPermissions( PERMISSIONS, 1);
 
         } else {
-            boolean_permission = true;
+
         }
     }
 
@@ -108,16 +111,37 @@ public class FragmentScan extends Fragment {
         if (resultCode == Activity.RESULT_OK && data != null) {
             if (requestCode == REQUEST_CODE) {
                 Uri uri = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
+                int returnstate = data.getIntExtra(ScanConstants.SCANNED_RETURN_STATE,0);
                 Bitmap bitmap = null;
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
                     getActivity().getContentResolver().delete(uri, null, null);
                     scannedImageView.setImageBitmap(bitmap);
+                    bitmapList.add(bitmap);
+                    //go to save activity
+                    if(returnstate == 0){
+                        saveImage();
+                    }
+                    if(returnstate == 1){
+                        addImage();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
+
+    public void saveImage(){
+        Intent saveintent = new Intent(getActivity(),SaveScan.class);
+        saveintent.putExtra("list", bitmapList);
+        Toast.makeText(getContext(), "save image", Toast.LENGTH_SHORT).show();
+        startActivity(saveintent);
+    }
+
+    public void addImage(){
+        openCamera();
+        Toast.makeText(getContext(), "add image", Toast.LENGTH_SHORT).show();
     }
 
 }

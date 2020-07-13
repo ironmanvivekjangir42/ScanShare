@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ public class ResultFragment extends Fragment {
     private View view;
     private ImageView scannedImageView;
     private Button doneButton;
+    private Button addButton;
     private Bitmap original;
     private Button originalButton;
     private Button MagicColorButton;
@@ -32,6 +34,8 @@ public class ResultFragment extends Fragment {
     private Button bwButton;
     private Bitmap transformed;
     private static ProgressDialogFragment progressDialogFragment;
+
+
 
     public ResultFragment() {
     }
@@ -57,6 +61,8 @@ public class ResultFragment extends Fragment {
         setScannedImage(bitmap);
         doneButton = (Button) view.findViewById(R.id.doneButton);
         doneButton.setOnClickListener(new DoneButtonClickListener());
+        addButton = (Button) view.findViewById(R.id.addimage);
+        addButton.setOnClickListener(new addButtonClickListener());
     }
 
     private Bitmap getBitmap() {
@@ -95,6 +101,41 @@ public class ResultFragment extends Fragment {
                         }
                         Uri uri = Utils.getUri(getActivity(), bitmap);
                         data.putExtra(ScanConstants.SCANNED_RESULT, uri);
+                        data.putExtra(ScanConstants.SCANNED_RETURN_STATE, 0);
+                        getActivity().setResult(Activity.RESULT_OK, data);
+                        original.recycle();
+                        System.gc();
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                dismissDialog();
+                                getActivity().finish();
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    }
+
+    private class addButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            showProgressDialog(getResources().getString(R.string.loading));
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Intent data = new Intent();
+                        Bitmap bitmap = transformed;
+                        if (bitmap == null) {
+                            bitmap = original;
+                        }
+                        Uri uri = Utils.getUri(getActivity(), bitmap);
+                        data.putExtra(ScanConstants.SCANNED_RESULT, uri);
+                        data.putExtra(ScanConstants.SCANNED_RETURN_STATE, 1);
                         getActivity().setResult(Activity.RESULT_OK, data);
                         original.recycle();
                         System.gc();
@@ -339,5 +380,12 @@ public class ResultFragment extends Fragment {
         bm.setPixels(threshold,0,width,0,0,width,height);
 
         return bm;
+    }
+
+    public static Bitmap RotateBitmap(Bitmap source, float angle)
+    {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 }
