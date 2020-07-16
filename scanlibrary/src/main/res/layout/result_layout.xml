@@ -26,6 +26,7 @@
     </FrameLayout>
 
     <LinearLayout
+        android:background="#081430"
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,6 +80,7 @@
 
     <LinearLayout
         android:id="@+id/bottomBar"
+        android:background="#081430"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -90,9 +92,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+
             android:background="@android:color/transparent"
-            android:drawableTop="@drawable/ic_image"
-            android:text="Rotate R"
+            android:drawableTop="@drawable/ic_baseline_rotate_left_24"
+            android:text="Rotate L"
             android:textColor="@android:color/white" />
 
         <Button
@@ -101,9 +104,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:drawableTop="@drawable/ic_enhamce_image"
+            android:drawableTop="@drawable/ic_baseline_rotate_right_24"
             android:singleLine="true"
-            android:text="Rotate L"
+            android:text="Rotate R"
             android:textColor="@android:color/white" />
 
         <Button
@@ -112,7 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:drawableTop="@drawable/ic_gray"
+            android:drawableTop="@drawable/ic_baseline_add_to_photos_24"
             android:singleLine="true"
             android:text="Add"
             android:textColor="@android:color/white" />
@@ -123,7 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:drawableTop="@drawable/ic_black_and_white"
+            android:drawableTop="@drawable/ic_baseline_done_24"
             android:singleLine="true"
             android:text="Done"
             android:textColor="@android:color/white" />

@@ -32,6 +32,8 @@ public class ResultFragment extends Fragment {
     private Button MagicColorButton;
     private Button grayModeButton;
     private Button bwButton;
+    private Button rotateR;
+    private Button rotateL;
     private Bitmap transformed;
     private static ProgressDialogFragment progressDialogFragment;
 
@@ -57,12 +59,32 @@ public class ResultFragment extends Fragment {
         grayModeButton.setOnClickListener(new GrayButtonClickListener());
         bwButton = (Button) view.findViewById(R.id.BWMode);
         bwButton.setOnClickListener(new BWButtonClickListener());
-        Bitmap bitmap = getBitmap();
+        final Bitmap bitmap = getBitmap();
         setScannedImage(bitmap);
         doneButton = (Button) view.findViewById(R.id.doneButton);
         doneButton.setOnClickListener(new DoneButtonClickListener());
         addButton = (Button) view.findViewById(R.id.addimage);
         addButton.setOnClickListener(new addButtonClickListener());
+
+        rotateL = (Button) view.findViewById(R.id.rotateL);
+        rotateR = (Button) view.findViewById(R.id.rotateR);
+
+        rotateL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transformed = RotateBitmap(transformed,90);
+                scannedImageView.setImageBitmap(transformed);
+
+            }
+        });
+        rotateR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transformed = RotateBitmap(transformed,270);
+                scannedImageView.setImageBitmap(transformed);
+            }
+        });
+
     }
 
     private Bitmap getBitmap() {
