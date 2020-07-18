@@ -1,3 +1,4 @@
+include ':myshare'
 include ':scanlibrary'
 rootProject.name='ScanShare'
 include ':app'
